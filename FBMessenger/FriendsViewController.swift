@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
 class FriendsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     private let cellId = "cellId"
     
-    var messages: [Message]?
+    var coreDataStack: CoreDataStack!
+    var messages: [NSManagedObject]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,7 @@ class FriendsViewController: UICollectionViewController, UICollectionViewDelegat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MessageCell
         
         if let message = messages?[indexPath.item] {
-            cell.message = message
+            cell.message = message as? Message
         }
         
         return cell

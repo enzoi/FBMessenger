@@ -7,41 +7,29 @@
 //
 
 import UIKit
-
-class Friend: NSData {
-    
-    var name: String?
-    var profileImageName: String?
-
-}
-
-class Message: NSData {
-    
-    var text: String?
-    var date: NSDate?
-    
-    var friend: Friend?
-    
-}
+import CoreData
 
 extension FriendsViewController {
     
     func setupData() {
         
-        let mark = Friend()
+        let context = self.coreDataStack.managedContext
+        
+        let mark = NSEntityDescription.insertNewObject(forEntityName: "Friend", into: context) as! Friend
+
         mark.name = "Mark Zuckerberg"
         mark.profileImageName = "zuckprofile"
         
-        let message1 = Message()
+        let message1 = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
         message1.text = "Hello. My name is Mark. Nice to meet you..."
         message1.date = NSDate()
         message1.friend = mark
         
-        let steve = Friend()
+        let steve = NSEntityDescription.insertNewObject(forEntityName: "Friend", into: context) as! Friend
         steve.name = "Steve Jobs"
         steve.profileImageName = "steve_profile"
         
-        let message2 = Message()
+        let message2 = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
         message2.text = "Stay hungry, stay foolish..."
         message2.date = NSDate()
         message2.friend = steve
