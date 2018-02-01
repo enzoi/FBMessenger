@@ -11,6 +11,7 @@
 		CFACB32D20223C6600C1E3DF /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACB32C20223C6600C1E3DF /* FriendsViewController.swift */; };
 		CFACB33220223C6600C1E3DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFACB33120223C6600C1E3DF /* Assets.xcassets */; };
 		CFACB33520223C6600C1E3DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFACB33320223C6600C1E3DF /* LaunchScreen.storyboard */; };
+		CFACB33F2022A18B00C1E3DF /* FriendsViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACB33E2022A18B00C1E3DF /* FriendsViewControllerHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		CFACB33120223C6600C1E3DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFACB33420223C6600C1E3DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CFACB33620223C6600C1E3DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFACB33E2022A18B00C1E3DF /* FriendsViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewControllerHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				CFACB32A20223C6600C1E3DF /* AppDelegate.swift */,
 				CFACB32C20223C6600C1E3DF /* FriendsViewController.swift */,
+				CFACB33E2022A18B00C1E3DF /* FriendsViewControllerHelper.swift */,
 				CFACB33120223C6600C1E3DF /* Assets.xcassets */,
 				CFACB33320223C6600C1E3DF /* LaunchScreen.storyboard */,
 				CFACB33620223C6600C1E3DF /* Info.plist */,
@@ -133,6 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFACB33F2022A18B00C1E3DF /* FriendsViewControllerHelper.swift in Sources */,
 				CFACB32D20223C6600C1E3DF /* FriendsViewController.swift in Sources */,
 				CFACB32B20223C6600C1E3DF /* AppDelegate.swift in Sources */,
 			);
@@ -290,6 +294,7 @@
 				CFACB33B20223C6600C1E3DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
