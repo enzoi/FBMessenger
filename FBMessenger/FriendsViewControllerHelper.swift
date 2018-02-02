@@ -34,16 +34,30 @@ extension FriendsViewController {
     
     func loadData(completion: @escaping (MessagesResult) -> Void) {
         
-        let fetchRequest: NSFetchRequest<Message> = Message.fetchRequest()
-        let moc = coreDataStack.managedContext
-        
-        moc.perform {
-            do {
-                let messages = try moc.fetch(fetchRequest)
-                completion(.success(messages))
-            } catch {
-                completion(.failure(error))
+        if let friends = fetchFriends() {
+
+            var finalMessages = [Message]()
+            
+            for friend in friends {
+ 
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Message")
+                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+                fetchRequest.predicate = NSPredicate(format: "friend.name = %@", friend.name!)
+                fetchRequest.fetchLimit = 1
+                
+                let moc = coreDataStack.managedContext
+                
+                do {
+                    let latestMessage = try moc.fetch(fetchRequest) as? [Message]
+                    finalMessages.append((latestMessage?.first)!)
+                } catch {
+                    completion(.failure(error))
+                }
             }
+            
+            let sortedMessages = finalMessages.sorted(by: {$0.date!.compare($1.date! as Date) == .orderedDescending})
+            completion(.success(sortedMessages))
+            
         }
     }
     
@@ -58,32 +72,33 @@ extension FriendsViewController {
         mark.name = "Mark Zuckerberg"
         mark.profileImageName = "zuckprofile"
         
-        let message1 = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
-        message1.text = "Hello. My name is Mark. Nice to meet you..."
-        message1.date = NSDate()
-        message1.friend = mark
+        createMessageWithText(text: "Hello. My name is Mark. Nice to meet you...", friend: mark, minutesAgo: 5, context: context)
         
         let steve = NSEntityDescription.insertNewObject(forEntityName: "Friend", into: context) as! Friend
         steve.name = "Steve Jobs"
         steve.profileImageName = "steve_profile"
         
-        let message2 = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
-        message2.text = "Stay hungry, stay foolish..."
-        message2.date = NSDate()
-        message2.friend = steve
+        createMessageWithText(text: "Stay hungry, stay foolish...", friend: steve, minutesAgo: 3, context: context)
+        createMessageWithText(text: "What's going on in Apple?", friend: steve, minutesAgo: 1, context: context)
+        
+        let donald = NSEntityDescription.insertNewObject(forEntityName: "Friend", into: context) as! Friend
+        donald.name = "Donald Trump"
+        donald.profileImageName = "donald_trump_profile"
+        
+        createMessageWithText(text: "You're fired!!", friend: donald, minutesAgo: 10, context: context)
         
         do {
             try context.save()
-        } catch let err {
-            print(err)
+        } catch let error {
+            print(error)
         }
-        
 
-        loadData() { (messagesResult) in
+        loadData() { (messageResult) in
             
-            switch messagesResult {
+            switch messageResult {
                 
             case let .success(messages):
+                
                 self.messages = messages
                 self.collectionView?.reloadData()
                 
@@ -92,6 +107,29 @@ extension FriendsViewController {
                 
             }
         }
-
+    }
+    
+    func createMessageWithText(text: String, friend: Friend, minutesAgo: Double, context: NSManagedObjectContext) {
+        let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
+        message.text = text
+        message.date = NSDate().addingTimeInterval(-minutesAgo * 60)
+        message.friend = friend
+        
+        friend.addToMessages(message)
+    }
+    
+    func fetchFriends() -> [Friend]? {
+        
+        let moc = coreDataStack.managedContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Friend")
+            
+        do {
+            return try moc.fetch(request) as? [Friend]
+                
+        } catch let error {
+            print(error)
+        }
+        
+        return nil
     }
 }

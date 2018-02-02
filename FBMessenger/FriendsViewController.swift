@@ -14,7 +14,7 @@ class FriendsViewController: UICollectionViewController, UICollectionViewDelegat
     private let cellId = "cellId"
     
     var coreDataStack: CoreDataStack!
-    var messages: [NSManagedObject]?
+    var messages: [Message]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class FriendsViewController: UICollectionViewController, UICollectionViewDelegat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MessageCell
         
         if let message = messages?[indexPath.item] {
-            cell.message = message as? Message
+            cell.message = message
         }
         
         return cell
@@ -63,16 +63,16 @@ class MessageCell: BaseCell {
                 hasReadImageView.image = UIImage(named: profileImageName)
             }
             
+            messageLabel.text = message?.text
+            
             if let date = message?.date {
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "h:mm a"
                 
                 timeLabel.text = dateFormatter.string(from: date as Date)
-                
             }
         }
-        
     }
     
     
@@ -92,14 +92,12 @@ class MessageCell: BaseCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Mark Zuckerberg"
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
     
     let messageLabel: UILabel = {
         let label = UILabel()
-        label.text = "Your firend's message and something else..."
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14)
         return label
@@ -107,7 +105,6 @@ class MessageCell: BaseCell {
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "12:05 pm"
         label.textColor = .darkGray
         label.textAlignment = .right
         label.font = UIFont.systemFont(ofSize: 14)
@@ -127,10 +124,7 @@ class MessageCell: BaseCell {
         addSubview(profileImageView)
         addSubview(dividerLineView)
         
-        setupContainerView()
-        
-        profileImageView.image = UIImage(named: "zuckprofile")
-        hasReadImageView.image = UIImage(named: "zuckprofile")
+        setupContainerView()  
         
         addConstraintsWithFormat("H:|-16-[v0(68)]|", views: profileImageView)
         addConstraintsWithFormat("V:[v0(68)]", views: profileImageView)
