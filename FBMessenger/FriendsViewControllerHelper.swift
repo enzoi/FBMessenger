@@ -109,7 +109,7 @@ extension FriendsViewController {
         }
     }
     
-    func createMessageWithText(text: String, friend: Friend, minutesAgo: Double, context: NSManagedObjectContext) {
+    private func createMessageWithText(text: String, friend: Friend, minutesAgo: Double, context: NSManagedObjectContext) {
         let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
         message.text = text
         message.date = NSDate().addingTimeInterval(-minutesAgo * 60)
