@@ -23,10 +23,10 @@
 
 /* Begin PBXFileReference section */
 		CF0F49202022DB5F0016BF9F /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		CF0F49222022DC530016BF9F /* Friend+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Friend+CoreDataClass.swift"; path = "../Friend+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CF0F49232022DC530016BF9F /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Friend+CoreDataProperties.swift"; path = "../Friend+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CF0F49242022DC530016BF9F /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataClass.swift"; path = "../Message+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CF0F49252022DC530016BF9F /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "../Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CF0F49222022DC530016BF9F /* Friend+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CF0F49232022DC530016BF9F /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CF0F49242022DC530016BF9F /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CF0F49252022DC530016BF9F /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CFACB32720223C6600C1E3DF /* FBMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFACB32A20223C6600C1E3DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFACB32C20223C6600C1E3DF /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -69,20 +69,44 @@
 			isa = PBXGroup;
 			children = (
 				CFACB32A20223C6600C1E3DF /* AppDelegate.swift */,
+				CFC401BF20A134B300159164 /* ViewControllers */,
+				CFC401C020A134CA00159164 /* Model */,
+				CFC401C120A134E000159164 /* Assets */,
+			);
+			path = FBMessenger;
+			sourceTree = "<group>";
+		};
+		CFC401BF20A134B300159164 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
 				CFACB32C20223C6600C1E3DF /* FriendsViewController.swift */,
 				CFACB33E2022A18B00C1E3DF /* FriendsViewControllerHelper.swift */,
 				CFC401BD20A1166D00159164 /* ChatLogController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CFC401C020A134CA00159164 /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				CFACB3402022B99900C1E3DF /* FBMessenger.xcdatamodeld */,
 				CF0F49202022DB5F0016BF9F /* CoreDataStack.swift */,
 				CF0F49222022DC530016BF9F /* Friend+CoreDataClass.swift */,
 				CF0F49232022DC530016BF9F /* Friend+CoreDataProperties.swift */,
 				CF0F49242022DC530016BF9F /* Message+CoreDataClass.swift */,
 				CF0F49252022DC530016BF9F /* Message+CoreDataProperties.swift */,
-				CFACB33120223C6600C1E3DF /* Assets.xcassets */,
-				CFACB33320223C6600C1E3DF /* LaunchScreen.storyboard */,
-				CFACB33620223C6600C1E3DF /* Info.plist */,
 			);
-			path = FBMessenger;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CFC401C120A134E000159164 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				CFACB33120223C6600C1E3DF /* Assets.xcassets */,
+				CFACB33620223C6600C1E3DF /* Info.plist */,
+				CFACB33320223C6600C1E3DF /* LaunchScreen.storyboard */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,12 +136,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = YTK;
 				TargetAttributes = {
 					CFACB32620223C6600C1E3DF = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = TVHJ8VSCRK;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -194,7 +219,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -202,7 +229,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -244,7 +275,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -252,7 +285,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -286,7 +323,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ytk.FBMessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -299,7 +337,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ytk.FBMessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -333,7 +372,8 @@
 				CFACB3412022B99900C1E3DF /* FBMessenger.xcdatamodel */,
 			);
 			currentVersion = CFACB3412022B99900C1E3DF /* FBMessenger.xcdatamodel */;
-			path = FBMessenger.xcdatamodeld;
+			name = FBMessenger.xcdatamodeld;
+			path = FBMessenger/Model/FBMessenger.xcdatamodeld;
 			sourceTree = SOURCE_ROOT;
 			versionGroupType = wrapper.xcdatamodel;
 		};
