@@ -13,19 +13,18 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    lazy var  coreDataStack = CoreDataStack(modelName: "FBMessenger")
-
+    lazy var coreDataStack = CoreDataStack(modelName: "FBMessenger")
+    var context: NSManagedObjectContext?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
+
+        window?.rootViewController = CustomTabBarController()
         
-        let layout = UICollectionViewFlowLayout()
-        let friendsController = FriendsViewController(collectionViewLayout: layout)
-        window?.rootViewController = UINavigationController(rootViewController: friendsController)
-        
-        friendsController.coreDataStack = coreDataStack
+        context = coreDataStack.managedContext
         
         return true
     }

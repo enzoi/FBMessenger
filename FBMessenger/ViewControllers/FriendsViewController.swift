@@ -12,8 +12,7 @@ import CoreData
 class FriendsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     private let cellId = "cellId"
-    
-    var coreDataStack: CoreDataStack!
+
     var messages: [Message]?
     
     override func viewDidLoad() {

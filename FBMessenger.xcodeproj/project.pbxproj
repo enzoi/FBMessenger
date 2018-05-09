@@ -12,6 +12,7 @@
 		CF0F49272022DC530016BF9F /* Friend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0F49232022DC530016BF9F /* Friend+CoreDataProperties.swift */; };
 		CF0F49282022DC530016BF9F /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0F49242022DC530016BF9F /* Message+CoreDataClass.swift */; };
 		CF0F49292022DC530016BF9F /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0F49252022DC530016BF9F /* Message+CoreDataProperties.swift */; };
+		CFA89FC320A135EC0046BF54 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA89FC220A135EC0046BF54 /* CustomTabBarController.swift */; };
 		CFACB32B20223C6600C1E3DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACB32A20223C6600C1E3DF /* AppDelegate.swift */; };
 		CFACB32D20223C6600C1E3DF /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACB32C20223C6600C1E3DF /* FriendsViewController.swift */; };
 		CFACB33220223C6600C1E3DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFACB33120223C6600C1E3DF /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 		CF0F49232022DC530016BF9F /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CF0F49242022DC530016BF9F /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CF0F49252022DC530016BF9F /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFA89FC220A135EC0046BF54 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		CFACB32720223C6600C1E3DF /* FBMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFACB32A20223C6600C1E3DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFACB32C20223C6600C1E3DF /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		CFC401BF20A134B300159164 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CFA89FC220A135EC0046BF54 /* CustomTabBarController.swift */,
 				CFACB32C20223C6600C1E3DF /* FriendsViewController.swift */,
 				CFACB33E2022A18B00C1E3DF /* FriendsViewControllerHelper.swift */,
 				CFC401BD20A1166D00159164 /* ChatLogController.swift */,
@@ -187,6 +190,7 @@
 				CF0F49262022DC530016BF9F /* Friend+CoreDataClass.swift in Sources */,
 				CF0F49212022DB5F0016BF9F /* CoreDataStack.swift in Sources */,
 				CFACB3422022B99900C1E3DF /* FBMessenger.xcdatamodeld in Sources */,
+				CFA89FC320A135EC0046BF54 /* CustomTabBarController.swift in Sources */,
 				CFACB32D20223C6600C1E3DF /* FriendsViewController.swift in Sources */,
 				CF0F49292022DC530016BF9F /* Message+CoreDataProperties.swift in Sources */,
 				CFACB32B20223C6600C1E3DF /* AppDelegate.swift in Sources */,
@@ -319,7 +323,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TVHJ8VSCRK;
-				INFOPLIST_FILE = FBMessenger/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/FBMessenger/Assets/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ytk.FBMessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -333,7 +337,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TVHJ8VSCRK;
-				INFOPLIST_FILE = FBMessenger/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/FBMessenger/Assets/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ytk.FBMessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
