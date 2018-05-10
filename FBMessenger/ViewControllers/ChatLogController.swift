@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import CoreData
+
+protocol CreateTextDelegate: class {
+    func createMessageWithText(message: Message, friend: Friend, context: NSManagedObjectContext, isSender: Bool)
+}
 
 class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    weak var delegate: CreateTextDelegate?
     private let cellId = "cellId"
     var messages: [Message]?
     
@@ -25,14 +31,43 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         return textField
     }()
     
-    let sendButton: UIButton = {
+    lazy var sendButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Send", for: .normal)
         let titleColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
         button.setTitleColor(titleColor, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         return button
     }()
+    
+    @objc func handleSend() {
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        guard let context = appDelegate?.context else { return }
+            
+        let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
+        message.text = inputTextField.text!
+        message.date = NSDate()
+        message.isSender = true
+        
+        delegate?.createMessageWithText(message: message, friend: friend!, context: context, isSender: true)
+        
+        do {
+            try context.save()
+            
+            messages?.append(message)
+            
+            let item: Int = messages!.count - 1
+            let insertionIndexPath = IndexPath(item: item, section: 0)
+            collectionView?.insertItems(at: [insertionIndexPath])
+            collectionView?.scrollToItem(at: insertionIndexPath, at: .bottom, animated: true)
+            inputTextField.text = nil
+            
+        } catch let error {
+            print(error)
+        }
+    }
     
     var bottomConstraint: NSLayoutConstraint?
     
@@ -228,18 +263,3 @@ class ChatLogMessageCell: BaseCell {
         textBubbleView.addConstraintsWithFormat("V:|[v0]|", views: bubbleImageView)
     }
 }
-
-extension UIViewController {
-    func hideKeyboard() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(UIViewController.dismissKeyboard))
-        
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
-

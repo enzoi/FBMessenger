@@ -60,6 +60,7 @@ class FriendsViewController: UICollectionViewController, UICollectionViewDelegat
         let layout = UICollectionViewFlowLayout()
         let controller = ChatLogController(collectionViewLayout: layout)
         controller.friend = messages?[indexPath.item].friend
+        controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
 
