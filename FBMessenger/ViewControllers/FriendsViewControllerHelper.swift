@@ -89,7 +89,19 @@ extension FriendsViewController {
             donald.name = "Donald Trump"
             donald.profileImageName = "donald_trump_profile"
             
-            createMessageWithText(text: "You're fired!!", friend: donald, minutesAgo: 10, into: context)
+            createMessageWithText(text: "You're fired!!!", friend: donald, minutesAgo: 20, into: context)
+            
+            let gandhi = NSEntityDescription.insertNewObject(forEntityName: "Friend", into: context) as! Friend
+            gandhi.name = "Mahatma Gandhi"
+            gandhi.profileImageName = "gandhi"
+            
+            createMessageWithText(text: "Love, Peace, and Joy", friend: gandhi, minutesAgo: 60 * 24 * 5, into: context)
+            
+            let hillary = NSEntityDescription.insertNewObject(forEntityName: "Friend", into: context) as! Friend
+            hillary.name = "Hillary Clinton"
+            hillary.profileImageName = "hillary_profile"
+            
+            createMessageWithText(text: "Please vote for me, you did for Billy", friend: hillary, minutesAgo: 60 * 24 * 8, into: context)
             
             do {
                 try context.save()
