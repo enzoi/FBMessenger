@@ -2,8 +2,9 @@
 //  Message+CoreDataClass.swift
 //  FBMessenger
 //
-//  Created by Yeontae Kim on 1/31/18.
+//  Created by Yeontae Kim on 5/9/18.
 //  Copyright © 2018 YTK. All rights reserved.
+//
 //
 
 import Foundation

@@ -2,8 +2,9 @@
 //  Message+CoreDataProperties.swift
 //  FBMessenger
 //
-//  Created by Yeontae Kim on 1/31/18.
+//  Created by Yeontae Kim on 5/9/18.
 //  Copyright © 2018 YTK. All rights reserved.
+//
 //
 
 import Foundation
@@ -18,6 +19,7 @@ extension Message {
 
     @NSManaged public var date: NSDate?
     @NSManaged public var text: String?
+    @NSManaged public var isSender: Bool
     @NSManaged public var friend: Friend?
 
 }

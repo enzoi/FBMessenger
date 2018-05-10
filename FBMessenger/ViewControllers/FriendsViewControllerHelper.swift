@@ -78,13 +78,7 @@ extension FriendsViewController {
             
             createMessageWithText(text: "Hello. My name is Mark. Nice to meet you...", friend: mark, minutesAgo: 5, into: context)
             
-            let steve = NSEntityDescription.insertNewObject(forEntityName: "Friend", into: context) as! Friend
-            steve.name = "Steve Jobs"
-            steve.profileImageName = "steve_profile"
-            
-            createMessageWithText(text: "Stay hungry, stay foolish...", friend: steve, minutesAgo: 3, into: context)
-            createMessageWithText(text: "Hello, how are you? Hope you are having a good morning", friend: steve, minutesAgo: 3, into: context)
-            createMessageWithText(text: "Are you interested in buying an Apple device? We have wide variety of devices that suit your needs. Please make your purchase with us!!", friend: steve, minutesAgo: 1, into: context)
+            createSteveMessagesWithContext(context: context)
             
             let donald = NSEntityDescription.insertNewObject(forEntityName: "Friend", into: context) as! Friend
             donald.name = "Donald Trump"
@@ -127,7 +121,24 @@ extension FriendsViewController {
         }
     }
     
-    private func createMessageWithText(text: String, friend: Friend, minutesAgo: Double, into: NSManagedObjectContext) {
+    private func createSteveMessagesWithContext(context: NSManagedObjectContext) {
+        let steve = NSEntityDescription.insertNewObject(forEntityName: "Friend", into: context) as! Friend
+        steve.name = "Steve Jobs"
+        steve.profileImageName = "steve_profile"
+        
+        createMessageWithText(text: "Stay hungry, stay foolish...", friend: steve, minutesAgo: 4, into: context)
+        createMessageWithText(text: "Hello, how are you? Hope you are having a good morning", friend: steve, minutesAgo: 3, into: context)
+        createMessageWithText(text: "Are you interested in buying an Apple device? We have wide variety of devices that suit your needs. Please make your purchase with us!!", friend: steve, minutesAgo: 2, into: context)
+        
+        // response message
+        createMessageWithText(text: "Yes, totally looking to buy an iPhone X", friend: steve, minutesAgo: 1, into: context, isSender: true)
+        
+        createMessageWithText(text: "Totally understand that you want the new iPhone X, but you'll have to wait until September for the new release. Sorry but that's just how Apple likes to do things.", friend: steve, minutesAgo: 1, into: context)
+        
+        createMessageWithText(text: "Absolutely, I'll just use my gigantic iPhone 6 Plus until then!!!", friend: steve, minutesAgo: 1, into: context, isSender: true)
+    }
+    
+    private func createMessageWithText(text: String, friend: Friend, minutesAgo: Double, into: NSManagedObjectContext, isSender: Bool = false) {
         
         let delegate = UIApplication.shared.delegate as? AppDelegate
 
@@ -136,6 +147,7 @@ extension FriendsViewController {
             message.text = text
             message.date = NSDate().addingTimeInterval(-minutesAgo * 60)
             message.friend = friend
+            message.isSender = isSender
             
             friend.addToMessages(message)
         }
