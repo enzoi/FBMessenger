@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 protocol CreateTextDelegate: class {
-    func createMessageWithText(message: Message, friend: Friend, context: NSManagedObjectContext, isSender: Bool)
+    func createMessageWithText(message: Message, friend: Friend)
 }
 
 class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -41,34 +41,6 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         return button
     }()
     
-    @objc func handleSend() {
-        
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        guard let context = appDelegate?.context else { return }
-            
-        let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
-        message.text = inputTextField.text!
-        message.date = NSDate()
-        message.isSender = true
-        
-        delegate?.createMessageWithText(message: message, friend: friend!, context: context, isSender: true)
-        
-        do {
-            try context.save()
-            
-            messages?.append(message)
-            
-            let item: Int = messages!.count - 1
-            let insertionIndexPath = IndexPath(item: item, section: 0)
-            collectionView?.insertItems(at: [insertionIndexPath])
-            collectionView?.scrollToItem(at: insertionIndexPath, at: .bottom, animated: true)
-            inputTextField.text = nil
-            
-        } catch let error {
-            print(error)
-        }
-    }
-    
     var bottomConstraint: NSLayoutConstraint?
     
     var friend: Friend? {
@@ -84,7 +56,7 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         
         tabBarController?.tabBar.isHidden = true
         
-        collectionView?.register(ChatLogMessageCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.register(ChatLogFriendCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.backgroundColor = .white
         
         view.addSubview(messageInputContainerView)
@@ -99,6 +71,53 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    private func setupInputComponents() {
+        let topBoarderView = UIView()
+        topBoarderView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        
+        messageInputContainerView.addSubview(inputTextField)
+        messageInputContainerView.addSubview(sendButton)
+        messageInputContainerView.addSubview(topBoarderView)
+        
+        messageInputContainerView.addConstraintsWithFormat("H:|-8-[v0][v1(60)]|", views: inputTextField, sendButton)
+        messageInputContainerView.addConstraintsWithFormat("V:|[v0]|", views: inputTextField)
+        messageInputContainerView.addConstraintsWithFormat("V:|[v0]|", views: sendButton)
+        
+        messageInputContainerView.addConstraintsWithFormat("H:|[v0]|", views: topBoarderView)
+        messageInputContainerView.addConstraintsWithFormat("V:|[v0(0.5)]", views: topBoarderView)
+    }
+    
+    
+    // MARK: - Selector methods
+    
+    @objc func handleSend() {
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        guard let context = appDelegate?.context else { return }
+        
+        let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
+        message.text = inputTextField.text!
+        message.date = NSDate()
+        message.isSender = true
+        
+        delegate?.createMessageWithText(message: message, friend: friend!)
+        
+        do {
+            try context.save()
+            
+            messages?.append(message)
+            
+            let item: Int = messages!.count - 1
+            let insertionIndexPath = IndexPath(item: item, section: 0)
+            collectionView?.insertItems(at: [insertionIndexPath])
+            collectionView?.scrollToItem(at: insertionIndexPath, at: .bottom, animated: true)
+            inputTextField.text = nil
+            
+        } catch let error {
+            print(error)
+        }
     }
     
     @objc func handleKeyboardNotification(notification: NSNotification) {
@@ -124,22 +143,9 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
             })
         }
     }
+
     
-    private func setupInputComponents() {
-        let topBoarderView = UIView()
-        topBoarderView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
-        
-        messageInputContainerView.addSubview(inputTextField)
-        messageInputContainerView.addSubview(sendButton)
-        messageInputContainerView.addSubview(topBoarderView)
-        
-        messageInputContainerView.addConstraintsWithFormat("H:|-8-[v0][v1(60)]|", views: inputTextField, sendButton)
-        messageInputContainerView.addConstraintsWithFormat("V:|[v0]|", views: inputTextField)
-        messageInputContainerView.addConstraintsWithFormat("V:|[v0]|", views: sendButton)
-        
-        messageInputContainerView.addConstraintsWithFormat("H:|[v0]|", views: topBoarderView)
-        messageInputContainerView.addConstraintsWithFormat("V:|[v0(0.5)]", views: topBoarderView)
-    }
+    // MARK: - collectionView methods
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("clicked")
@@ -154,7 +160,7 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatLogMessageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatLogFriendCell
         
         cell.messageTextView.text = messages?[indexPath.item].text
         
@@ -175,7 +181,7 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
                 cell.profileImageView.isHidden = false
                 
                 // cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-                cell.bubbleImageView.image = ChatLogMessageCell.grayBubbleImage
+                cell.bubbleImageView.image = ChatLogFriendCell.grayBubbleImage
                 cell.bubbleImageView.tintColor = UIColor(white: 0.95, alpha: 1)
                 cell.messageTextView.textColor = .black
                 
@@ -186,7 +192,7 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
                 cell.profileImageView.isHidden = true
                 
                 // cell.textBubbleView.backgroundColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
-                cell.bubbleImageView.image = ChatLogMessageCell.blueBubbleImage
+                cell.bubbleImageView.image = ChatLogFriendCell.blueBubbleImage
                 cell.bubbleImageView.tintColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
                 cell.messageTextView.textColor = .white
             }
@@ -211,55 +217,4 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         return UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
     }
     
-}
-
-class ChatLogMessageCell: BaseCell {
-    
-    let messageTextView: UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 18)
-        textView.backgroundColor = .clear
-        textView.isEditable = false
-        return textView
-    }()
-    
-    let textBubbleView: UIView = {
-        let view = UIView()
-        // view.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        view.layer.cornerRadius = 15
-        view.layer.masksToBounds = true
-        return view
-    }()
-    
-    let profileImageView: UIImageView = {
-       let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.layer.cornerRadius = 15
-        iv.layer.masksToBounds = true
-        return iv
-    }()
-    
-    static let grayBubbleImage = UIImage(named: "bubble_gray")?.resizableImage(withCapInsets: UIEdgeInsets(top: 22, left: 26, bottom: 22, right: 26)).withRenderingMode(.alwaysTemplate)
-    
-    static let blueBubbleImage = UIImage(named: "bubble_blue")?.resizableImage(withCapInsets: UIEdgeInsets(top: 22, left: 26, bottom: 22, right: 26)).withRenderingMode(.alwaysTemplate)
-    
-    let bubbleImageView: UIImageView = {
-       let iv = UIImageView()
-        return iv
-    }()
-    
-    override func setupViews() {
-        super.setupViews()
-        
-        addSubview(textBubbleView)
-        addSubview(messageTextView)
-        addSubview(profileImageView)
-        addConstraintsWithFormat("H:|-8-[v0(30)]|", views: profileImageView)
-        addConstraintsWithFormat("V:[v0(30)]|", views: profileImageView)
-        profileImageView.backgroundColor = .red
-        
-        textBubbleView.addSubview(bubbleImageView)
-        textBubbleView.addConstraintsWithFormat("H:|[v0]|", views: bubbleImageView)
-        textBubbleView.addConstraintsWithFormat("V:|[v0]|", views: bubbleImageView)
-    }
 }

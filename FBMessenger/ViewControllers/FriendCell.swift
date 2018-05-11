@@ -1,5 +1,5 @@
 //
-//  MessageCell.swift
+//  FriendCell.swift
 //  FBMessenger
 //
 //  Created by Yeontae Kim on 5/10/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageCell: BaseCell {
+class FriendCell: BaseCell {
     
     // NOT working as expected
     override var isHighlighted: Bool {

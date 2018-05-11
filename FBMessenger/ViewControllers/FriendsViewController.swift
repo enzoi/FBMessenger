@@ -22,7 +22,7 @@ class FriendsViewController: UICollectionViewController, UICollectionViewDelegat
         
         collectionView?.backgroundColor = .white
         collectionView?.alwaysBounceVertical = true
-        collectionView?.register(MessageCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(FriendCell.self, forCellWithReuseIdentifier: cellId)
         
         setupData()
     }
@@ -42,7 +42,7 @@ class FriendsViewController: UICollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MessageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FriendCell
         
         if let message = messages?[indexPath.item] {
             cell.message = message

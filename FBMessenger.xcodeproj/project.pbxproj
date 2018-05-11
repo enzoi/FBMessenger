@@ -20,7 +20,8 @@
 		CFACB33F2022A18B00C1E3DF /* FriendsViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACB33E2022A18B00C1E3DF /* FriendsViewControllerHelper.swift */; };
 		CFACB3422022B99900C1E3DF /* FBMessenger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CFACB3402022B99900C1E3DF /* FBMessenger.xcdatamodeld */; };
 		CFC401BE20A1166D00159164 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC401BD20A1166D00159164 /* ChatLogController.swift */; };
-		CFFD3E7520A511F700ED2900 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3E7420A511F700ED2900 /* MessageCell.swift */; };
+		CFFD3E7520A511F700ED2900 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3E7420A511F700ED2900 /* FriendCell.swift */; };
+		CFFD3E7720A5191900ED2900 /* ChatLogMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3E7620A5191900ED2900 /* ChatLogMessageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +40,8 @@
 		CFACB33E2022A18B00C1E3DF /* FriendsViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewControllerHelper.swift; sourceTree = "<group>"; };
 		CFACB3412022B99900C1E3DF /* FBMessenger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FBMessenger.xcdatamodel; sourceTree = "<group>"; };
 		CFC401BD20A1166D00159164 /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
-		CFFD3E7420A511F700ED2900 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		CFFD3E7420A511F700ED2900 /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
+		CFFD3E7620A5191900ED2900 /* ChatLogMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogMessageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +87,10 @@
 			children = (
 				CFA89FC220A135EC0046BF54 /* CustomTabBarController.swift */,
 				CFACB32C20223C6600C1E3DF /* FriendsViewController.swift */,
+				CFFD3E7420A511F700ED2900 /* FriendCell.swift */,
 				CFACB33E2022A18B00C1E3DF /* FriendsViewControllerHelper.swift */,
 				CFC401BD20A1166D00159164 /* ChatLogController.swift */,
-				CFFD3E7420A511F700ED2900 /* MessageCell.swift */,
+				CFFD3E7620A5191900ED2900 /* ChatLogMessageCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -193,10 +196,11 @@
 				CF0F49262022DC530016BF9F /* Friend+CoreDataClass.swift in Sources */,
 				CF5891F820A4235C00270591 /* Message+CoreDataClass.swift in Sources */,
 				CF0F49212022DB5F0016BF9F /* CoreDataStack.swift in Sources */,
-				CFFD3E7520A511F700ED2900 /* MessageCell.swift in Sources */,
+				CFFD3E7520A511F700ED2900 /* FriendCell.swift in Sources */,
 				CFACB3422022B99900C1E3DF /* FBMessenger.xcdatamodeld in Sources */,
 				CF5891F920A4235C00270591 /* Message+CoreDataProperties.swift in Sources */,
 				CFA89FC320A135EC0046BF54 /* CustomTabBarController.swift in Sources */,
+				CFFD3E7720A5191900ED2900 /* ChatLogMessageCell.swift in Sources */,
 				CFACB32D20223C6600C1E3DF /* FriendsViewController.swift in Sources */,
 				CFACB32B20223C6600C1E3DF /* AppDelegate.swift in Sources */,
 				CF0F49272022DC530016BF9F /* Friend+CoreDataProperties.swift in Sources */,

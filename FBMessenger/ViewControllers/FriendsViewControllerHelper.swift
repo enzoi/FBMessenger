@@ -194,7 +194,7 @@ extension FriendsViewController: CreateTextDelegate {
         }
     }
     
-    func createMessageWithText(message: Message, friend: Friend, context: NSManagedObjectContext, isSender: Bool) {
+    func createMessageWithText(message: Message, friend: Friend) {
         
         friend.addToMessages(message)
 
